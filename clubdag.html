@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dirty Hill – Clubdag & Activiteiten</title>
+  <meta name="description" content="Alles over de clubdag en reguliere activiteiten van mountainbikeclub Dirty Hill." />
+  <style>
+    :root {
+      --accent: #1f8f3a;
+      --muted: #6b7280;
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --shadow: 0 6px 18px rgba(15,23,42,0.08);
+      --max-w: 900px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: #0f172a;
+    }
+
+    .site {
+      max-width: var(--max-w);
+      margin: 40px auto;
+      padding: 24px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), #2bb673);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    nav {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .nav-link {
+      padding: 8px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .nav-link:hover {
+      background: white;
+      color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+
+    .menu-btn {
+      display: none;
+      background: none;
+      border: 0;
+      font-size: 18px;
+      padding: 8px;
+    }
+    @media(max-width: 800px) {
+      nav { display: none; }
+      .menu-btn { display: inline-block; }
+    }
+
+    .card {
+      background: var(--card);
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 32px;
+      color: var(--accent);
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+
+    p, li {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    .cta {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 12px 20px;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .cta:hover {
+      background: #196f2e;
+    }
+
+    .schedule {
+      margin-top: 16px;
+      border-left: 4px solid var(--accent);
+      padding-left: 16px;
+    }
+
+    .schedule-item {
+      margin-bottom: 12px;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 32px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <header>
+      <a class="brand" href="index.html">
+        <span class="logo">DH</span>
+        <div>
+          <div style="font-weight:700">Dirty Hill</div>
+          <div style="font-size:12px; color: var(--muted)">Mountainbikeclub</div>
+        </div>
+      </a>
+      <nav>
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="activiteiten.html">Activiteiten</a>
+        <a class="nav-link" href="parcours.html">Parcours</a>
+        <a class="nav-link" href="lidmaatschap.html">Lid worden</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </nav>
+      <button class="menu-btn" aria-expanded="false" aria-controls="mobile-nav">☰</button>
+    </header>
+
+    <div class="card">
+      <h1>Clubdag & Activiteiten</h1>
+      <p>Welkom bij de pagina met informatie over de jaarlijkse clubdag en de reguliere activiteiten van Mountainbikeclub Dirty Hill. Als lid kun je deelnemen aan wekelijkse trainingen, groepsritten en onze speciale clubdagen.</p>
+    </div>
+
+    <div class="card">
+      <h2>Wat is de Clubdag?</h2>
+      <p>De clubdag van Dirty Hill is een jaarlijks hoogtepunt. Leden komen samen voor een dag vol mountainbiken, clinics, gezelligheid en activiteiten. Dit is dé ideale gelegenheid om je clubgenoten te leren kennen, nieuwe technieken te oefenen en te genieten van een gezamenlijke rit.</p>
+      <p>Historisch gezien organiseert Dirty Hill ook clubweekenden met overnachting, gezamenlijke toertochten en gezamenlijke activiteiten voor alle leeftijden. :contentReference[oaicite:1]{index=1}</p>
+    </div>
+
+    <div class="card">
+      <h2>Reguliere Activiteiten</h2>
+      <p>Dirty Hill organiseert een aantal kernactiviteiten voor haar leden: </p>
+      <ul>
+        <li>Wekelijkse trainingen voor jeugd, beginners én gevorderden</li>
+        <li>Groepsritten (toertochten) door de regio Bergschenhoek en omgeving</li>
+        <li>Clubweekenden</li>
+        <li>Techniekclinics en skills-sessies</li>
+      </ul>
+      <p>Deze activiteiten zorgen ervoor dat de club een divers aanbod heeft, waar recreatief mountainbiken centraal staat. :contentReference[oaicite:2]{index=2}</p>
+    </div>
+
+    <div class="card">
+      <h2>Agenda & Planning</h2>
+      <div class="schedule">
+        <!-- Dit kun je dynamisch maken met JS als je echte data hebt -->
+        <div class="schedule-item"><strong>Zaterdag 12 juli 2025:</strong> Clubdag Outdoor Valley (tentatief)</div>
+        <div class="schedule-item"><strong>Elke dinsdag:</strong> Techniektraining (19:00 – 21:00)</div>
+        <div class="schedule-item"><strong>Elke zondag:</strong> Groepsrit (09:30-start)</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Waarom meedoen?</h2>
+      <p>Door deel te nemen aan de clubactiviteiten krijg je:</p>
+      <ul>
+        <li>Een sterke mountainbike-community met veel ervaren en beginnende rijders</li>
+        <li>Toegang tot training met begeleiding</li>
+        <li>Een gezellig clubgevoel tijdens gezamenlijke evenementen</li>
+        <li>De kans om je vaardigheden te verbeteren in een veilige en stimulerende omgeving</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Locatie</h2>
+      <p>De thuisbasis van Dirty Hill is Outdoor Valley bij Bergschenhoek, op <em>Hoeksekade 141, 2661 JL</em>. :contentReference[oaicite:3]{index=3}</p>
+      <p>Het mountainbikeparcours in het Hoge Bergse Bos wordt regelmatig gebruikt voor trainingen en ritten. :contentReference[oaicite:4]{index=4}</p>
+    </div>
+
+    <a class="cta" href="activiteiten.html">Bekijk alle activiteiten / Ritten</a>
+
+    <div class="footer">
+      © Dirty Hill – Mountainbikeclub  
+    </div>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    (function(){
+      const btn = document.querySelector('.menu-btn');
+      const nav = document.querySelector('nav');
+      let open = false;
+      btn.addEventListener('click', ()=>{
+        open = !open;
+        btn.setAttribute('aria-expanded', String(open));
+        if(open){
+          nav.style.display = 'flex';
+          nav.style.position = 'absolute';
+          nav.style.right = '24px';
+          nav.style.top = '72px';
+          nav.style.flexDirection = 'column';
+          nav.style.background = 'white';
+          nav.style.padding = '12px';
+          nav.style.borderRadius = '10px';
+          nav.style.boxShadow = 'var(--shadow)';
+        } else {
+          nav.style.display = '';
+          nav.style.position = '';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

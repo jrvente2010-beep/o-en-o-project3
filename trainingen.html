@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dirty Hill – Training & Wedstrijden Kalender</title>
+  <meta name="description" content="Kalender voor trainingen en wedstrijden bij Dirty Hill" />
+  <style>
+    :root{
+      --accent:#1f8f3a;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --bg:#f6f7fb;
+      --shadow:0 6px 18px rgba(15,23,42,0.08);
+      --max-w:1100px;
+      font-family:Inter, system-ui, -apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#0f172a;}
+    .site{max-width:var(--max-w);margin:32px auto;padding:24px;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;}
+    .logo{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#2bb673);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;box-shadow:var(--shadow);}
+    nav{display:flex;gap:12px;align-items:center;}
+    .nav-link{padding:8px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:600;}
+    .nav-link:hover{background:white;color:var(--accent);box-shadow:var(--shadow);}
+    .menu-btn{display:none;background:none;border:0;font-size:18px;padding:8px}
+    @media(max-width:800px){nav{display:none}.menu-btn{display:inline-block}}
+
+    .back-home{display:inline-block;margin-bottom:16px;color:var(--accent);text-decoration:none;font-weight:600;}
+    .card{background:var(--card);padding:22px;border-radius:12px;box-shadow:var(--shadow);margin-top:20px;}
+    h1{font-size:28px;margin:0 0 10px 0;}
+    h2{font-size:20px;margin:12px 0 8px 0;}
+    p,li{color:var(--muted);line-height:1.6;}
+
+    .calendar {display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:18px;}
+    .weekday { font-size:13px; color:var(--muted); text-align:center; padding:8px 6px; }
+    .day {
+      min-height:120px;
+      background:linear-gradient(180deg,#fff,#f8fef8);
+      border-radius:10px;
+      padding:6px;
+      position:relative;
+      border:1px solid rgba(0,0,0,0.04);
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
+    }
+    .day.other { opacity:0.45; }
+    .day .date { font-weight:700; margin-bottom:6px; flex-shrink:0; }
+    .event-pill {
+      display:block;
+      padding:3px 5px;
+      border-radius:6px;
+      font-size:12px;
+      margin-bottom:4px;
+      background:rgba(31,143,58,0.12);
+      color:var(--accent);
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      flex-shrink:0;
+    }
+    .day .more {
+      margin-top:auto;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .controls { display:flex; gap:8px; align-items:center; margin-top:12px; flex-wrap:wrap;}
+    .btn { padding:8px 12px; border-radius:8px; background:var(--accent); color:white; text-decoration:none; font-weight:600; cursor:pointer; border:none; }
+    .btn.ghost { background:white; color:var(--accent); border:1px solid rgba(31,143,56,0.08); box-shadow:var(--shadow); }
+    .month-title { font-weight:700; font-size:18px; }
+    .sidebar { margin-top:18px; display:grid; gap:12px; }
+    .selected-event {border-bottom:1px solid rgba(0,0,0,0.04); padding-bottom:8px; margin-bottom:8px;}
+    .selected-event h4{margin:0; font-weight:700;}
+    .selected-event .meta{font-size:13px;color:var(--muted);}
+    .flex{display:flex;gap:12px;align-items:center}
+  </style>
+</head>
+<body>
+  <div class="site">
+    <header>
+      <a class="brand" href="index.html">
+        <span class="logo">DH</span>
+        <div>
+          <div style="font-weight:700">Dirty Hill</div>
+          <div style="font-size:12px;color:var(--muted)">Mountainbikeclub</div>
+        </div>
+      </a>
+      <nav>
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="activiteiten.html">Activiteiten</a>
+        <a class="nav-link" href="parcours.html">Parcours</a>
+        <a class="nav-link" href="lidmaatschap.html">Lid worden</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+        <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+      </nav>
+      <button class="menu-btn">☰</button>
+    </header>
+
+    <a class="back-home" href="home.html">← Terug naar Home</a>
+
+    <div class="card layout">
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div class="month-title" id="monthTitle">—</div>
+            <div class="small" id="monthRange">—</div>
+          </div>
+          <div class="flex">
+            <button class="btn ghost" id="prevMonth">Vorige</button>
+            <button class="btn ghost" id="nextMonth">Volgende</button>
+            <button class="btn" id="todayBtn">Vandaag</button>
+          </div>
+        </div>
+        <div style="margin-top:12px;display:grid;grid-template-columns:repeat(7,1fr);gap:6px;">
+          <div class="weekday">Ma</div><div class="weekday">Di</div><div class="weekday">Wo</div><div class="weekday">Do</div><div class="weekday">Vr</div><div class="weekday">Za</div><div class="weekday">Zo</div>
+        </div>
+
+        <div class="calendar" id="calendar"></div>
+      </div>
+
+      <aside>
+        <div class="card">
+          <h2>Geselecteerde dag</h2>
+          <div id="selectedInfo" class="small">Klik op een datum om trainingssessies of wedstrijden te zien.</div>
+          <div id="selectedList"></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer style="margin-top:18px;color:var(--muted);font-size:13px">© Dirty Hill – Mountainbikeclub</footer>
+  </div>
+
+<script>
+// statische data met alleen trainingen en wedstrijden
+const eventsMap = {
+  "2025-11-04":[{title:"Jeugdtraining", time:"18:00", level:"Jeugd", desc:"Techniek en vaardigheden"}],
+  "2025-11-05":[{title:"Volwassenentraining", time:"19:00", level:"Alle", desc:"Conditie & tempo"}],
+  "2025-11-10":[{title:"Wedstrijd MTB ZH", time:"10:00", level:"Alle", desc:"MTB Cup Zuid Holland"}],
+  "2025-11-12":[{title:"Training Gevorderd", time:"19:00", level:"Gevorderd", desc:"Snelheidsintervallen"}],
+  "2025-11-20":[{title:"Training Beginners", time:"18:30", level:"Beginners", desc:"Basis techniek"}],
+  "2025-12-01":[{title:"Wedstrijd Omloop", time:"09:30", level:"Alle", desc:"Clubwedstrijd"}]
+};
+
+let today = new Date();
+let currentYear = today.getFullYear();
+let currentMonth = today.getMonth();
+let selectedDate = null;
+
+function fmtDate(d){
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,"0");
+  const day = String(d.getDate()).padStart(2,"0");
+  return `${y}-${m}-${day}`;
+}
+function humanDate(iso){
+  const dt = new Date(iso + "T00:00:00");
+  return dt.toLocaleDateString('nl-NL',{weekday:'short',day:'numeric',month:'short'});
+}
+function startOfMonth(y,m){ return new Date(y, m, 1); }
+function endOfMonth(y,m){ return new Date(y, m+1, 0); }
+
+function renderCalendar(){
+  const cal = document.getElementById("calendar");
+  cal.innerHTML = "";
+  const first = startOfMonth(currentYear, currentMonth);
+  const last = endOfMonth(currentYear, currentMonth);
+  const dayOfWeek = (first.getDay()+6)%7;
+  const startDate = new Date(first);
+  startDate.setDate(first.getDate() - dayOfWeek);
+
+  for(let i=0;i<42;i++){
+    const d = new Date(startDate);
+    d.setDate(startDate.getDate()+i);
+    const iso = fmtDate(d);
+    const dom = d.getDate();
+    const el = document.createElement("div");
+    el.className = "day";
+    if(d.getMonth() !== currentMonth) el.classList.add("other");
+    el.dataset.date = iso;
+    el.innerHTML = `<div class="date">${dom}</div>`;
+
+    const evs = eventsMap[iso] || [];
+    for(let j=0;j<Math.min(evs.length,3); j++){
+      const e = evs[j];
+      const pill = document.createElement("span");
+      pill.className = "event-pill";
+      pill.title = `${e.title} ${e.time || ""}`;
+      pill.textContent = `${e.time ? e.time + " • " : ""}${e.title}`;
+      el.appendChild(pill);
+    }
+    if(evs.length > 3){
+      const more = document.createElement("div");
+      more.className = "more";
+      more.textContent = `+ ${evs.length - 3} meer`;
+      el.appendChild(more);
+    }
+
+    el.addEventListener("click", ()=> onDayClick(iso));
+    cal.appendChild(el);
+  }
+
+  const monthTitle = document.getElementById("monthTitle");
+  const monthRange = document.getElementById("monthRange");
+  const dmid = new Date(currentYear, currentMonth, 1);
+  monthTitle.textContent = dmid.toLocaleDateString('nl-NL',{month:'long',year:'numeric'});
+  monthRange.textContent = `${humanDate(fmtDate(startOfMonth(currentYear,currentMonth)))} — ${humanDate(fmtDate(endOfMonth(currentYear,currentMonth)))}`;
+}
+
+const selectedInfo = document.getElementById("selectedInfo");
+const selectedList = document.getElementById("selectedList");
+
+function onDayClick(iso){
+  selectedDate = iso;
+  renderSelected();
+}
+
+function renderSelected(){
+  if(!selectedDate){
+    selectedInfo.textContent = "Klik op een datum om iets te zien.";
+    selectedList.innerHTML = "";
+    return;
+  }
+  selectedInfo.innerHTML = `<strong>${humanDate(selectedDate)}</strong>`;
+  const evs = eventsMap[selectedDate] || [];
+  if(evs.length === 0){
+    selectedList.innerHTML = `<div class="small" style="margin-top:10px">Geen training of wedstrijd gepland.</div>`;
+  } else {
+    selectedList.innerHTML = "";
+    evs.forEach(e=>{
+      const wrap = document.createElement("div");
+      wrap.className = "selected-event";
+      const h = document.createElement("h4");
+      h.textContent = `${e.time ? e.time + " • " : ""}${e.title}`;
+      wrap.appendChild(h);
+      const meta = document.createElement("div");
+      meta.className = "meta";
+      meta.textContent = `Niveau: ${e.level || 'Alle'}`;
+      wrap.appendChild(meta);
+      if(e.desc){
+        const p = document.createElement("div");
+        p.className = "small";
+        p.textContent = e.desc;
+        wrap.appendChild(p);
+      }
+      selectedList.appendChild(wrap);
+    });
+  }
+}
+
+// navigatie
+document.getElementById("prevMonth").addEventListener("click", ()=>{
+  if(currentMonth === 0){ currentYear--; currentMonth = 11; } else currentMonth--;
+  renderCalendar();
+});
+document.getElementById("nextMonth").addEventListener("click", ()=>{
+  if(currentMonth === 11){ currentYear++; currentMonth = 0; } else currentMonth++;
+  renderCalendar();
+});
+document.getElementById("todayBtn").addEventListener("click", ()=>{
+  const t = new Date();
+  currentYear = t.getFullYear();
+  currentMonth = t.getMonth();
+  renderCalendar();
+});
+
+// init
+renderCalendar();
+
+// mobiele menu toggle
+(function(){
+  const btn = document.querySelector('.menu-btn');
+  const nav = document.querySelector('nav');
+  let open = false;
+  btn.addEventListener('click', ()=>{
+    open = !open;
+    if(open){
+      nav.style.display = 'flex';
+      nav.style.position = 'absolute';
+      nav.style.right = '24px';
+      nav.style.top = '72px';
+      nav.style.flexDirection = 'column';
+      nav.style.background = 'white';
+      nav.style.padding = '12px';
+      nav.style.borderRadius = '10px';
+      nav.style.boxShadow = 'var(--shadow)';
+    } else {
+      nav.style.display = '';
+      nav.style.position = '';
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dirty Hill - Clubsite</title>
+  <meta name="description" content="Voorbeeldsite gebaseerd op een mountainbikeclub: nieuws, trainingen, parcours en lidmaatschap.">
+  <style>
+    :root{
+      --accent:#1f8f3a;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --bg:#f6f7fb;
+      --shadow: 0 6px 18px rgba(15,23,42,0.08);
+      --max-w:1100px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:#0f172a;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+    .site{max-width:var(--max-w);margin:32px auto;padding:24px;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;}
+    .logo{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#2bb673);display:inline-flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;box-shadow:var(--shadow);}
+    nav{display:flex;gap:12px;align-items:center}
+    .nav-link{padding:8px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:600}
+    .nav-link:hover{background:white;color:var(--accent);box-shadow:var(--shadow)}
+    .menu-btn{display:none;background:none;border:0;font-size:18px;padding:8px}
+    @media(max-width:800px){nav{display:none}.menu-btn{display:inline-block}}
+    .hero{margin-top:18px;display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start;}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)}
+    .hero-left h1{margin:0 0 8px 0;font-size:28px}
+    .meta{color:var(--muted);font-size:14px;margin-bottom:12px}
+    .news-list{display:flex;flex-direction:column;gap:12px}
+    .news-item{display:flex;gap:12px;align-items:center}
+    .news-thumb{width:120px;height:72px;border-radius:8px;flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#e6eef0}
+    .news-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+    .news-body h3{margin:0 0 6px 0;font-size:16px}
+    .news-body p{margin:0;color:var(--muted);font-size:14px}
+    .events-list{display:flex;flex-direction:column;gap:10px}
+    .event{display:flex;justify-content:space-between;gap:8px;padding:10px;border-radius:8px;background:#fbfffa;border:1px solid rgba(31,143,58,0.06)}
+    .event .when{color:var(--muted);font-size:13px}
+    .cta{display:inline-block;padding:8px 12px;border-radius:8px;background:var(--accent);color:white;text-decoration:none;font-weight:600}
+    .tracks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .track{padding:12px;border-radius:10px;background:linear-gradient(180deg,#fff,#f8fef8);border:1px solid rgba(0,0,0,0.04)}
+    .track h4{margin:0 0 6px 0}
+    @media(max-width:1000px){.hero{grid-template-columns:1fr} .tracks{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){.tracks{grid-template-columns:1fr}}
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:14px;padding:12px}
+  </style>
+</head>
+<body>
+  <div class="site">
+    <header>
+      <a class="brand" href="index.html">
+        <span class="logo">DH</span>
+        <div>
+          <div style="font-weight:700">Dirty Hill</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px">Mountainbikeclub - project o&o</div>
+        </div>
+      </a>
+      <nav aria-label="Hoofdmenu">
+        <a class="nav-link" href="home.html">Home</a>
+        <a class="nav-link" href="activiteiten.html">Activiteiten</a>
+        <a class="nav-link" href="parcours.html">Parcours</a>
+        <a class="nav-link" href="lidmaatschap.html">Lid worden</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+        <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+      </nav>
+      <button class="menu-btn" aria-expanded="false" aria-controls="mobile-nav">☰</button>
+    </header>
+
+    <main class="hero">
+      <section class="hero-left">
+        <div class="card">
+          <h1 id="home">Welkom bij Dirty Hill</h1>
+          <div class="meta">Clubactiviteiten, trainingen en parcoursinfo — alles op één plek.</div>
+          <div class="news-list" id="news"></div>
+          <div class="card" style="margin-top:12px">
+            <h3>Laatste mededelingen</h3>
+            <p class="meta">Belangrijke updates en aankondigingen van de commissie.</p>
+            <ul id="announcements"></ul>
+          </div>
+        </div>
+      </section>
+
+      <aside class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <strong>Komende activiteiten</strong>
+          <a href='activiteiten.html' class="nav-link" style="padding:6px 8px">Bekijk alles</a>
+        </div>
+        <div class="events-list" id="events"></div>
+        <hr style="margin:12px 0;border:none;border-top:1px solid rgba(15,23,42,0.04)">
+        <div>
+          <strong>Lid worden</strong>
+          <p class="meta">Sluit je aan bij onze club — trainingen, ritten en korting bij lokale partners.</p>
+          <a class="cta" href="lidmaatschap.html">Aanmelden</a>
+        </div>
+      </aside>
+    </main>
+
+    <section id="parcours" class="tracks">
+      <div class="track card">
+        <h4>Technische lus</h4>
+        <p class="meta">Korte, steile secties en rock garden — gemiddeld niveau.</p>
+      </div>
+      <div class="track card">
+        <h4>Flowtrail</h4>
+        <p class="meta">Snelle bochten en berms — leuk voor snelheidstrainingen.</p>
+      </div>
+      <div class="track card">
+        <h4>Enduro-route</h4>
+        <p class="meta">Langere route met klimmetjes en singletrack.</p>
+      </div>
+    </section>
+
+    <footer>
+      <div>© Dirty Hill</div>
+    </footer>
+  </div>
+
+<script>
+const nieuws = [
+  {title:'Clubavond: techniektraining', excerpt:'Dinsdag 19:00 - techniek en skills op de baan.', image:'https://files.dirtyhill.nl/sites/dh/2015/07/IMG_3666-e1449006406404-1179x350.jpg'},
+  {title:'Ronde door het bos', excerpt:'Zondag groepsrit, alle niveaus welkom.', image:'https://files.dirtyhill.nl/sites/dh/2025/10/771Y8721-880x440.jpg'},
+  {title:'Parcours onderhoud', excerpt:'Vrijdag 09:00 - help mee met herstellen van regenbeschadiging.', image:'https://files.dirtyhill.nl/sites/dh/2016/12/20161222_nieuwsbericht_baanwerkdag_8-1-2017.jpg'}
+];
+
+const events = [
+  {name:'Training (Beginners)', date:'2025-11-04', time:'19:00'},
+  {name:'Groepsritten', date:'2025-11-09', time:'09:30'},
+  {name:'Club dagen/weekenden', date:'2025-12-06', time:'17:00'}  
+];
+
+function renderNews(){
+  const container = document.getElementById('news');
+  container.innerHTML = '';
+  nieuws.forEach(n=>{
+    const el = document.createElement('article');
+    el.className = 'news-item card';
+    el.innerHTML = `
+      <div class="news-thumb"><img src="${n.image}" alt="${n.title}"></div>
+      <div class="news-body">
+        <h3>${n.title}</h3>
+        <p>${n.excerpt}</p>
+      </div>`;
+    container.appendChild(el);
+  });
+}
+
+function renderEvents(){
+  const container = document.getElementById('events');
+  container.innerHTML = '';
+  events.forEach(e=>{
+    const el = document.createElement('div');
+    el.className = 'event';
+    el.innerHTML = `
+      <div>
+        <div style="font-weight:700">${e.name}</div>
+        <div class="when">${formatDate(e.date)} • ${e.time}</div>
+      </div>
+      <div>
+        <a class="cta" href="activiteiten.html">Deelnemen</a>
+      </div>`;
+    container.appendChild(el);
+  });
+}
+
+function renderAnnouncements(){
+  const el = document.getElementById('announcements');
+  el.innerHTML = '';
+  ['Volgende week: routecontrole','Vrijwilligers gezocht voor jeugdritten'].forEach(i=>{
+    const li=document.createElement('li');
+    li.textContent=i;
+    el.appendChild(li);
+  });
+}
+
+function formatDate(d){
+  try{
+    const dt = new Date(d+ 'T00:00:00');
+    return dt.toLocaleDateString('nl-NL',{weekday:'short',day:'numeric',month:'short'});
+  }catch(e){return d}
+}
+
+// Mobile menu toggle
+(function(){
+  const btn = document.querySelector('.menu-btn');
+  const nav = document.querySelector('nav');
+  let open=false;
+  btn.addEventListener('click', ()=>{
+    open = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    if(open){
+      nav.style.display = 'flex';
+      nav.style.position = 'absolute';
+      nav.style.right = '24px';
+      nav.style.top = '72px';
+      nav.style.flexDirection = 'column';
+      nav.style.background = 'white';
+      nav.style.padding = '12px';
+      nav.style.borderRadius = '10px';
+      nav.style.boxShadow = 'var(--shadow)';
+    } else {
+      nav.style.display = '';
+      nav.style.position = '';
+    }
+  });
+})();
+
+// Init
+renderNews();
+renderEvents();
+renderAnnouncements();
+</script>
+
+</body>
+</html>

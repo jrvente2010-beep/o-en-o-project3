@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leaderboard - Dirty Hill Stijl</title>
+<style>
+  :root{
+    --accent:#1f8f3a;
+    --muted:#6b7280;
+    --card:#ffffff;
+    --bg:#f6f7fb;
+    --shadow:0 6px 18px rgba(15,23,42,0.08);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  }
+
+  body {
+    margin:0;
+    background:var(--bg);
+    color:#0f172a;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    min-height:100vh;
+    padding:24px;
+  }
+
+  /* Navigatie */
+  nav{
+    display:flex;
+    gap:20px;
+    margin-bottom:24px;
+  }
+
+  .nav-link{
+    text-decoration:none;
+    color:var(--accent);
+    font-weight:600;
+  }
+
+  .nav-link:hover{
+    text-decoration:underline;
+  }
+
+  /* Leaderboard kaart */
+  .leaderboard-card {
+    background: var(--card);
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .leaderboard-card h2 {
+    margin-top:0;
+    margin-bottom:16px;
+    font-size:24px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    text-align:left;
+    padding:10px;
+    border-bottom:1px solid rgba(15,23,42,0.06);
+    font-size:16px;
+  }
+
+  th {
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .gold { color: #b8860b; font-weight:700; }
+  .silver { color: #9aa0a6; font-weight:700; }
+  .bronze { color: #8a5a1a; font-weight:700; }
+
+  .input-row {
+    margin-top:16px;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+
+  .input-row input {
+    flex:1;
+    padding:8px;
+    border-radius:6px;
+    border:1px solid #ccc;
+  }
+
+  .input-row button {
+    padding:8px 16px;
+    border:none;
+    border-radius:6px;
+    background:var(--accent);
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATIE -->
+<nav aria-label="Hoofdmenu">
+  <a class="nav-link" href="index.html">Home</a>
+  <a class="nav-link" href="activiteiten.html">Activiteiten</a>
+  <a class="nav-link" href="parcours.html">Parcours</a>
+  <a class="nav-link" href="lidmaatschap.html">Lid worden</a>
+  <a class="nav-link" href="contact.html">Contact</a>
+  <a class="nav-link" href="Leaderboard.html">Leaderboard</a>
+</nav>
+
+<div class="leaderboard-card">
+  <h2>Leaderboard</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Naam</th>
+        <th>Tijd</th>
+        <th>Leeftijd</th>
+      </tr>
+    </thead>
+    <tbody id="lb-body"></tbody>
+  </table>
+
+  <div class="input-row">
+    <input type="text" id="name" placeholder="Naam">
+    <input type="text" id="time" placeholder="Tijd (mm:ss)">
+    <input type="number" id="age" placeholder="Leeftijd">
+    <button id="addBtn">Toevoegen</button>
+  </div>
+</div>
+
+<script>
+  const leaderboard = [
+    {name:'Fietser 1', time:'1:47', age:22, cls:'gold'},
+    {name:'Fietser 2', time:'2:22', age:49, cls:'silver'},
+    {name:'Fietser 3', time:'2:26', age:67, cls:'bronze'}
+  ];
+
+  const tbody = document.getElementById('lb-body');
+
+  function renderLeaderboard() {
+    tbody.innerHTML = '';
+    leaderboard.forEach(l => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td class="${l.cls || ''}">${l.name}</td><td>${l.time}</td><td>${l.age}</td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  document.getElementById('addBtn').addEventListener('click', () => {
+    const name = document.getElementById('name').value.trim();
+    const time = document.getElementById('time').value.trim();
+    const age = document.getElementById('age').value.trim();
+
+    if(!name || !time || !age) return alert('Vul alle velden in!');
+
+    leaderboard.push({name, time, age: parseInt(age)});
+    document.getElementById('name').value='';
+    document.getElementById('time').value='';
+    document.getElementById('age').value='';
+
+    renderLeaderboard();
+  });
+
+  renderLeaderboard();
+</script>
+
+</body>
+</html>

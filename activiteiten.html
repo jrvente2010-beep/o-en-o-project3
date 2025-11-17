@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dirty Hill – Activiteiten</title>
+  <meta name="description" content="Bekijk alle activiteiten van mountainbikeclub Dirty Hill: trainingen, ritten, evenementen en clubdagen.">
+  
+  <style>
+    :root{
+      --accent:#1f8f3a;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --bg:#f6f7fb;
+      --shadow:0 6px 18px rgba(15,23,42,0.08);
+      --max-w:1100px;
+      font-family:Inter, system-ui, -apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+    }
+
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#0f172a;}
+    .site{max-width:var(--max-w);margin:32px auto;padding:24px;}
+
+    /* Header & nav */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;}
+    .logo{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#2bb673);
+      display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;box-shadow:var(--shadow);}
+    nav{display:flex;gap:12px;align-items:center;}
+    .nav-link{padding:8px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:600;}
+    .nav-link:hover{background:white;color:var(--accent);box-shadow:var(--shadow);}
+    .menu-btn{display:none;background:none;border:0;font-size:18px;padding:8px}
+
+    @media(max-width:800px){
+      nav{display:none}
+      .menu-btn{display:inline-block}
+    }
+
+    /* Cards */
+    .card{
+      background:var(--card);
+      padding:22px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      margin-top:20px;
+    }
+
+    h1{font-size:30px;margin:0 0 10px 0;}
+    h2{font-size:24px;margin:14px 0 8px 0;}
+    p,li{color:var(--muted);line-height:1.6;}
+    ul{margin-left:20px;}
+
+    /* Grid voor activiteiten-overzicht */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:20px;
+    }
+    @media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){.grid{grid-template-columns:1fr}}
+
+    .activity{
+      background:linear-gradient(180deg,#fff,#f8fef8);
+      border:1px solid rgba(0,0,0,0.05);
+      padding:20px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+    }
+    .activity h3{margin:0 0 6px 0}
+    .badge{
+      display:inline-block;
+      padding:4px 10px;
+      background:var(--accent);
+      color:white;
+      border-radius:6px;
+      font-size:12px;
+      margin-bottom:6px;
+    }
+
+    .cta{
+      display:inline-block;padding:10px 14px;border-radius:8px;background:var(--accent);
+      color:white;text-decoration:none;font-weight:600;margin-top:12px;
+    }
+
+    footer{
+      margin-top:32px;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+      padding:12px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="site">
+  
+  <!-- HEADER -->
+  <header>
+    <a class="brand" href="index.html">
+      <span class="logo">DH</span>
+      <div>
+        <div style="font-weight:700">Dirty Hill</div>
+        <div style="font-size:12px;color:var(--muted)">Mountainbikeclub</div>
+      </div>
+    </a>
+
+    <nav>
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="activiteiten.html">Activiteiten</a>
+      <a class="nav-link" href="parcours.html">Parcours</a>
+      <a class="nav-link" href="lidmaatschap.html">Lid worden</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+      <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+    </nav>
+
+    <button class="menu-btn">☰</button>
+  </header>
+
+  <!-- TITEL -->
+  <div class="card">
+    <h1>Clubactiviteiten</h1>
+    <p>Dirty Hill organiseert wekelijks trainingen, toertochten, evenementen en jaarlijks een gezellige clubdag en clubweekend. Voor ieder niveau is er iets te doen.</p>
+  </div>
+
+  <!-- OVERZICHT (mooi grid) -->
+  <section class="grid">
+
+    <div class="activity">
+      <span class="badge">Elke week</span>
+      <h3>Trainingen</h3>
+      <p>Trainingen voor jeugd, volwassenen, beginners en gevorderden. Van techniek tot conditie en snelheid.</p>
+      <a class="cta" href='trainingen.html'>Meer info</a>
+    </div>
+
+    <div class="activity">
+      <span class="badge">Maandelijks</span>
+      <h3>Groepsritten</h3>
+      <p>Gezellige en sportieve ritten door omgeving Bergschenhoek, geschikt voor alle niveaus.</p>
+      <a class="cta" href='groepsritten.html'>Meer info</a>
+    </div>
+
+    <div class="activity">
+      <span class="badge">Elk jaar</span>
+      <h3>Clubdag & Clubweekend</h3>
+      <p>Een weekend vol fun, mountainbiken, gezelligheid en activiteiten voor jeugd en volwassenen.</p>
+      <a class="cta" href="clubdag.html">Meer info</a>
+    </div>
+
+  </section>
+
+  <!-- TRAININGEN -->
+  <div class="card" id="trainingen">
+    <h2>Trainingen</h2>
+    <p>Als lid kun je deelnemen aan alle trainingen, begeleid door ervaren trainers.</p>
+    <ul>
+      <li>Jeugdtrainingen (t/m 17 jaar)</li>
+      <li>Volwassenentraining – techniek & conditie</li>
+      <li>Beginnerslessen (instroom mogelijkheid)</li>
+      <li>Gevorderde training – snelheid, skills & endurance</li>
+    </ul>
+    <p>Trainingen worden aangepast op niveau en omstandigheden. Helm verplicht.</p>
+  </div>
+
+  <!-- GROEPSRITTEN -->
+  <div class="card" id="groepsritten">
+    <h2>Groepsritten</h2>
+    <p>Een paar keer per maand organiseren we groepsritten voor leden. Het doel is samen rijden, leren en plezier maken.</p>
+    <ul>
+      <li>Start vanaf het clubhuis</li>
+      <li>Niveaugroepen zodat iedereen mee kan</li>
+      <li>Routes van 20–45 km</li>
+      <li>Heuvels, bos en flowtrails</li>
+    </ul>
+  </div>
+
+  <!-- TOERTOCHTEN & EVENEMENTEN -->
+  <div class="card">
+    <h2>Toertochten & Evenementen</h2>
+    <p>We doen als club mee aan toertochten in de regio en organiseren zelf speciale MTB-dagen.</p>
+    <ul>
+      <li>Regionale toertochten (Rottemeren, Bergschenhoek, Zuid-Holland)</li>
+      <li>Techniekclinics door trainers</li>
+      <li>Vrijwilligersdagen voor parcours en clubhuis</li>
+    </ul>
+  </div>
+
+  <!-- CLUBDAG & CLUBWEEKEND -->
+  <div class="card" id="clubweekend">
+    <h2>Clubdag & Clubweekend</h2>
+    <p>Een jaarlijks hoogtepunt voor alle leden. Mountainbiken, eten, activiteiten en veel gezelligheid!</p>
+    <ul>
+      <li>Jeugd- en volwassenweekend</li>
+      <li>Trainingskamp op locatie</li>
+      <li>Nieuwe routes, clinics en challenges</li>
+      <li>BBQ, spellen en avondprogramma</li>
+    </ul>
+  </div>
+  
+  <!-- FOOTER -->
+  <footer>
+    © Dirty Hill – Mountainbikeclub  
+    <div style="margin-top:6px;font-size:13px;">Adres · Contact · Privacy</div>
+  </footer>
+
+</div>
+
+<script>
+  // Mobile menu toggle
+  const btn = document.querySelector('.menu-btn');
+  const nav = document.querySelector('nav');
+  let open = false;
+
+  btn.addEventListener('click', () => {
+    open = !open;
+    if(open){
+      nav.style.display = 'flex';
+      nav.style.position = 'absolute';
+      nav.style.top = '72px';
+      nav.style.right = '24px';
+      nav.style.flexDirection = 'column';
+      nav.style.background = 'white';
+      nav.style.padding = '12px';
+      nav.style.borderRadius = '10px';
+      nav.style.boxShadow = 'var(--shadow)';
+    } else {
+      nav.style.display = '';
+      nav.style.position = '';
+    }
+  });
+</script>
+
+</body>
+</html>
